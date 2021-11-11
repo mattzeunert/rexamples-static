@@ -1,0 +1,125 @@
+<html>
+  <head>
+    <title>How to run the code</title>
+    <link rel="stylesheet" type="text/css" href="/static/main.css" />
+    <link href='http://fonts.googleapis.com/css?family=Droid+Sans+Mono' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=PT+Sans:700' rel='stylesheet' type='text/css'>
+    
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-19870914-2']);
+      _gaq.push(['_trackPageview']);
+
+      ( function() {
+          var ga = document.createElement('script');
+          ga.type = 'text/javascript';
+          ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0];
+          s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <div style="margin-left:auto;margin-right:auto;width:1024px;margin-top:0px;margin-bottom:18px;" class="outer-wrapper">
+      <div id="header">
+        <div id="site-title">
+          <a href="/">R Examples</a>
+        </div>
+        <div id="page-title">
+          <h1><a href="">How to run the code</a></h1>
+        </div>
+      </div>
+      <div style="clear:both"/>
+
+        <div class="sidebar-left">
+          <div class="introduction-nav">
+            <a href="/1/R%20Basics">Basics</a>
+            <a href="/2/Functions">Functions</a>
+            <a href="/3/Countdown">Countdown</a>
+            <a href="/4/Reading%20user%20input">User input</a>
+            <a href="/5/Guess%20a%20random%20number%20game">Random number game</a>
+            <a href="/7/Lists">Lists</a>
+            <a href="/10/Reading%20data">Reading data</a>
+            <a href="/11/Filtering%20data">Filtering data</a>
+          </div>
+          <a href="/9/More%20Examples" style="margin-top:6px;">More Examples</a>
+          <a href="/8/How%20to%20run%20the%20code"  style="margin-top:12px;">How to run the code</a>
+          <a href="/13/Finding%20data%20sources"  style="margin-top:3px;">Finding data sources</a>
+
+          <!--  <a href="/contact"  style="margin-top:6px;">Contact</a> -->
+        </div>
+        <div id="content">
+          <div class="mobile-h1"><a href="" class="mobile-page-title">How to run the code</a></div>
+          
+          
+
+<p style="margin-top:0px">
+  I find it easiest to use <a href="http://www.rstudio.org/">RStudio</a>.
+  You can also paste the code in a normal R console or let R run a source file. However these approaches are a bit less fail-safe.
+</p>
+
+<h2>Using RStudio</h2>
+<p>
+  <a href="http://www.rstudio.org/download/desktop">Download and install RStudio</a>.<br>
+  Open RStudio and do this:
+  <ol>
+    <li>Click on the menu: File -&gt; New -&gt; R Script
+    <li>Paste the code in the new source code area
+    <li>Click the "Source" button above the code area:
+   </ol>
+</p>
+<img src="http://www.rexamples.com/img/rstudio-run-source.jpg"/>
+<p>
+  You can also use the console in RStudio. If you click "Run" instead of "Source" user input might not work properly.
+</p>
+<p>
+  You can use the R documentation like this: <span class="code">help(function.name)</span>.
+</p>
+
+<h2>Using the R console</h2>
+Running the <span class="code">r</span> program on the command line or elsewhere will start the console. You can paste your code there.
+<h3>Problems with this approach</h3>
+<p>
+  This will generally work if you use <a href="http://www.stat.psu.edu/~dhunter/R/html/base/html/source.html"><span class="code">source("filename.r")</span></a> to run your code.
+  If you paste the code some of it might be read as user input.
+</p>
+<h2>Running a source file with R</h2>
+<p>
+  You can run a source file like this: <span class="code">r -f filename.r</span>.<br>
+  R also provides a lot of <a href="http://cran.r-project.org/doc/manuals/R-intro.html#Invoking-R-from-the-command-line">other command line arguments</a>.
+</p>
+<h3>Problems with this approach</h3>
+<p>
+  I have not managed to get user input to work here.  
+</p>
+
+          
+        </div>
+        <div id="sidebar-right">
+
+          <a href="http://google-styleguide.googlecode.com/svn/trunk/google-r-style.html">R Style Guide</a>
+          <a href="http://cran.r-project.org/doc/manuals/R-lang.pdf">R Language Definition (pdf)</a>
+          <a href="http://www.stat.psu.edu/~dhunter/R/html/">R Function Info</a>
+          <a href="http://rstudio.org/">RStudio IDE</a>
+
+          <a href="http://www.mattzeunert.com" style="color: #999; font-size: 10px;margin-top: 20px;">Made by Matt Zeunert</a>
+        </div>
+      </div>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+      <script>
+        if ($("body").width() < 1024) {
+          $("#sidebar-right").prepend($(".sidebar-left").html() + "<hr>");
+        }
+      </script>
+      
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $("a[href$='" + document.location.pathname +  "']").css("color","black");
+    });
+  </script>
+
+  </body>
+</html>

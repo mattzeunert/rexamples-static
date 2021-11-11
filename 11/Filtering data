@@ -1,0 +1,181 @@
+<html>
+  <head>
+    <title>Filtering data</title>
+    <link rel="stylesheet" type="text/css" href="/static/main.css" />
+    <link href='http://fonts.googleapis.com/css?family=Droid+Sans+Mono' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=PT+Sans:700' rel='stylesheet' type='text/css'>
+    
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-19870914-2']);
+      _gaq.push(['_trackPageview']);
+
+      ( function() {
+          var ga = document.createElement('script');
+          ga.type = 'text/javascript';
+          ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0];
+          s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <div style="margin-left:auto;margin-right:auto;width:1024px;margin-top:0px;margin-bottom:18px;" class="outer-wrapper">
+      <div id="header">
+        <div id="site-title">
+          <a href="/">R Examples</a>
+        </div>
+        <div id="page-title">
+          <h1><a href="">Filtering data</a></h1>
+        </div>
+      </div>
+      <div style="clear:both"/>
+
+        <div class="sidebar-left">
+          <div class="introduction-nav">
+            <a href="/1/R%20Basics">Basics</a>
+            <a href="/2/Functions">Functions</a>
+            <a href="/3/Countdown">Countdown</a>
+            <a href="/4/Reading%20user%20input">User input</a>
+            <a href="/5/Guess%20a%20random%20number%20game">Random number game</a>
+            <a href="/7/Lists">Lists</a>
+            <a href="/10/Reading%20data">Reading data</a>
+            <a href="/11/Filtering%20data">Filtering data</a>
+          </div>
+          <a href="/9/More%20Examples" style="margin-top:6px;">More Examples</a>
+          <a href="/8/How%20to%20run%20the%20code"  style="margin-top:12px;">How to run the code</a>
+          <a href="/13/Finding%20data%20sources"  style="margin-top:3px;">Finding data sources</a>
+
+          <!--  <a href="/contact"  style="margin-top:6px;">Contact</a> -->
+        </div>
+        <div id="content">
+          <div class="mobile-h1"><a href="" class="mobile-page-title">Filtering data</a></div>
+          
+          
+<p class="preface">
+	This code uses a <a href="http://www.census.gov/popest/national/files/NST_EST2009_ALLDATA.csv">dataset file with population estimates</a> by the US Census Bureau <a href="http://www.census.gov/popest/datasets.html">(more info)</a>.
+</p>
+
+<pre class="code">
+tbl &lt;- read.table(file.choose(),header=TRUE,sep=',')
+population &lt;- tbl[c(&quot;NAME&quot;,&quot;POPESTIMATE2009&quot;,&quot;NPOPCHG_2009&quot;)]
+smallest.state.pop &lt;- min(population$POPESTIMATE2009)
+print(population[population$POPESTIMATE2009==smallest.state.pop,])
+</pre>
+
+<pre class="output">
+      NAME POPESTIMATE2009 NPOPCHG_2009
+56 Wyoming          544270        11289
+</pre>
+
+<p>
+	This piece of code extracts the data about the smallest state from the data frame.<br>
+	The first line has reads the data from the CSV file (<a href="/10/Reading%20data">as explained here</a>).
+</p>
+
+<h2>Picking specific columns out of a data frame</h2>
+<p>
+	The second line limits the rows to the state name, the population estimate for 2009 and the total population change for 2009.
+	<br>
+	Let's use the <a href="http://www.stat.psu.edu/~dhunter/R/html/utils/html/head.html"><span class="code">head</span></a> function to look at what we get:
+</p>
+<pre class="code">
+head(population)
+</pre>
+<pre class="output">
+           NAME POPESTIMATE2009 NPOPCHG_2009
+1 United States       307006550      2631704
+2     Northeast        55283679       223483
+3       Midwest        66836911       241314
+4         South       113317879      1296857
+5          West        71568081       870050
+6       Alabama         4708708        31244
+</pre>
+
+<h2>Finding the lowest value in a list</h2>
+<p>
+	First the POPESTIMATE2009 column is selected:
+</p>
+<pre class="code">
+population$POPESTIMATE2009
+</pre>
+<pre class="output">
+ [1] 307006550  55283679  66836911 113317879  71568081   4708708    698473
+ [8]   6595778   2889450  36961664   5024748   3518288    885122    599657
+[...]
+[50]   2784572    621760   7882590   6664195   1819777   5654774    544270
+[57]   3967288
+</pre>
+<p>
+	Then the <a href="http://www.stat.psu.edu/~dhunter/R/html/base/html/Extremes.html"><span class="code">min</span></a> function is used to find the minimum:
+</p>
+<pre class="code">
+min(population$POPESTIMATE2009)
+</pre>
+<pre class="output">
+[1] 544270
+</pre>
+
+<h2>Selecting the row with the lowest population value</h2>
+<p>
+	You use something like a WHERE clause in data frame indices:
+	<pre class="code">
+data.frame[condition]
+</pre>
+	This condition works because it creates an array of booleans depending on whether the field value is a match:
+</p>
+<pre class="code">
+population$POPESTIMATE2009==smallest.state.pop
+</pre>
+<pre class="output">
+[1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+[13] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+[25] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+[37] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+[49] FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE
+</pre>
+<p>
+	In this case only the second to last row should be selected. We use a comma after the row index because we want all the columns:
+</p>
+
+<pre class="code">
+population[population$POPESTIMATE2009==smallest.state.pop,]
+</pre>
+<pre class="output">
+      NAME POPESTIMATE2009 NPOPCHG_2009
+56 Wyoming          544270        11289
+</pre>
+
+<br>
+
+
+          
+        </div>
+        <div id="sidebar-right">
+
+          <a href="http://google-styleguide.googlecode.com/svn/trunk/google-r-style.html">R Style Guide</a>
+          <a href="http://cran.r-project.org/doc/manuals/R-lang.pdf">R Language Definition (pdf)</a>
+          <a href="http://www.stat.psu.edu/~dhunter/R/html/">R Function Info</a>
+          <a href="http://rstudio.org/">RStudio IDE</a>
+
+          <a href="http://www.mattzeunert.com" style="color: #999; font-size: 10px;margin-top: 20px;">Made by Matt Zeunert</a>
+        </div>
+      </div>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+      <script>
+        if ($("body").width() < 1024) {
+          $("#sidebar-right").prepend($(".sidebar-left").html() + "<hr>");
+        }
+      </script>
+      
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $("a[href$='" + document.location.pathname +  "']").css("color","black");
+    });
+  </script>
+
+  </body>
+</html>

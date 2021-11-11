@@ -1,0 +1,144 @@
+<html>
+  <head>
+    <title>Sample()</title>
+    <link rel="stylesheet" type="text/css" href="/static/main.css" />
+    <link href='http://fonts.googleapis.com/css?family=Droid+Sans+Mono' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=PT+Sans:700' rel='stylesheet' type='text/css'>
+    
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-19870914-2']);
+      _gaq.push(['_trackPageview']);
+
+      ( function() {
+          var ga = document.createElement('script');
+          ga.type = 'text/javascript';
+          ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0];
+          s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <div style="margin-left:auto;margin-right:auto;width:1024px;margin-top:0px;margin-bottom:18px;" class="outer-wrapper">
+      <div id="header">
+        <div id="site-title">
+          <a href="/">R Examples</a>
+        </div>
+        <div id="page-title">
+          <h1><a href="">Sample()</a></h1>
+        </div>
+      </div>
+      <div style="clear:both"/>
+
+        <div class="sidebar-left">
+          <div class="introduction-nav">
+            <a href="/1/R%20Basics">Basics</a>
+            <a href="/2/Functions">Functions</a>
+            <a href="/3/Countdown">Countdown</a>
+            <a href="/4/Reading%20user%20input">User input</a>
+            <a href="/5/Guess%20a%20random%20number%20game">Random number game</a>
+            <a href="/7/Lists">Lists</a>
+            <a href="/10/Reading%20data">Reading data</a>
+            <a href="/11/Filtering%20data">Filtering data</a>
+          </div>
+          <a href="/9/More%20Examples" style="margin-top:6px;">More Examples</a>
+          <a href="/8/How%20to%20run%20the%20code"  style="margin-top:12px;">How to run the code</a>
+          <a href="/13/Finding%20data%20sources"  style="margin-top:3px;">Finding data sources</a>
+
+          <!--  <a href="/contact"  style="margin-top:6px;">Contact</a> -->
+        </div>
+        <div id="content">
+          <div class="mobile-h1"><a href="" class="mobile-page-title">Sample()</a></div>
+          
+          
+
+
+<pre class="code">
+print(sample(1:3))
+print(sample(1:3, size=3, replace=FALSE))  # same as previous line
+print(sample(c(2,5,3), size=4, replace=TRUE)
+print(sample(1:2, size=10, prob=c(1,3), replace=TRUE))
+</pre>
+<pre class="output">
+[1] 3 1 2
+[1] 2 1 3
+[1] 2 5 2 2
+[1] 2 2 2 1 1 2 2 2 1 2
+</pre>
+
+<h2>Overview</h2>
+<p>
+	By default <a href="http://www.stat.psu.edu/~dhunter/R/html/base/html/sample.html"><span class="code">sample()</span></a> randomly reorders the elements passed as the first argument.
+	This means that the default size is the size of the passed array.
+	<span class="code">replace=TRUE</span> makes sure that no element occurs twice.
+</p>
+<p>
+	The last line uses a weighed random distribution instead of a uniform one.
+	One out of four numbers are 1, the out of four are 3.
+</p>
+<h2>Arguments</h2>
+<h3>size</h3>
+<p>
+	This is the size of the returned list. 
+	If <span class="code">replace</span> is disabled <span class="code">size</span>  must be no bigger than the length of the first argument.
+</p>
+<h3>replace</h3>
+<p>
+	If this is true a sample may contain an element several times while another element might not occur at all.
+</p>
+<pre class="code">
+print(sample(c(2,5,3), size=3, replace=FALSE))
+print(sample(c(2,5,3), size=3, replace=TRUE))
+</pre>
+<pre class="output">
+[1] 2 3 5
+[1] 2 3 3
+</pre>
+<p>
+	Allowing some elements to occur more than once lets you get a sample longer than the first argument.
+</p>
+<h3>prob</h3>
+<pre class="code">
+barplot(table(sample(1:3, size=1000, replace=TRUE, prob=c(.30,.60,.10))))
+</pre>
+<img src="http://www.rexamples.com/img/sample-prob-distribution.png"/>
+<p>
+	The <span class="code">prob=c(.30,.60,.10)</span> cause 30% ones, 60% twos and 10% threes.
+	The numbers don't have to add up to 1 - they don't in the example at the top of the page.
+</p>
+<p>
+	Table sums up the individual items in the 1000-element list.
+</p>
+
+
+          
+        </div>
+        <div id="sidebar-right">
+
+          <a href="http://google-styleguide.googlecode.com/svn/trunk/google-r-style.html">R Style Guide</a>
+          <a href="http://cran.r-project.org/doc/manuals/R-lang.pdf">R Language Definition (pdf)</a>
+          <a href="http://www.stat.psu.edu/~dhunter/R/html/">R Function Info</a>
+          <a href="http://rstudio.org/">RStudio IDE</a>
+
+          <a href="http://www.mattzeunert.com" style="color: #999; font-size: 10px;margin-top: 20px;">Made by Matt Zeunert</a>
+        </div>
+      </div>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+      <script>
+        if ($("body").width() < 1024) {
+          $("#sidebar-right").prepend($(".sidebar-left").html() + "<hr>");
+        }
+      </script>
+      
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $("a[href$='" + document.location.pathname +  "']").css("color","black");
+    });
+  </script>
+
+  </body>
+</html>

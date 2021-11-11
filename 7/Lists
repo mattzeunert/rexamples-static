@@ -1,0 +1,205 @@
+<html>
+  <head>
+    <title>Lists</title>
+    <link rel="stylesheet" type="text/css" href="/static/main.css" />
+    <link href='http://fonts.googleapis.com/css?family=Droid+Sans+Mono' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=PT+Sans:700' rel='stylesheet' type='text/css'>
+    
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-19870914-2']);
+      _gaq.push(['_trackPageview']);
+
+      ( function() {
+          var ga = document.createElement('script');
+          ga.type = 'text/javascript';
+          ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0];
+          s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <div style="margin-left:auto;margin-right:auto;width:1024px;margin-top:0px;margin-bottom:18px;" class="outer-wrapper">
+      <div id="header">
+        <div id="site-title">
+          <a href="/">R Examples</a>
+        </div>
+        <div id="page-title">
+          <h1><a href="">Lists</a></h1>
+        </div>
+      </div>
+      <div style="clear:both"/>
+
+        <div class="sidebar-left">
+          <div class="introduction-nav">
+            <a href="/1/R%20Basics">Basics</a>
+            <a href="/2/Functions">Functions</a>
+            <a href="/3/Countdown">Countdown</a>
+            <a href="/4/Reading%20user%20input">User input</a>
+            <a href="/5/Guess%20a%20random%20number%20game">Random number game</a>
+            <a href="/7/Lists">Lists</a>
+            <a href="/10/Reading%20data">Reading data</a>
+            <a href="/11/Filtering%20data">Filtering data</a>
+          </div>
+          <a href="/9/More%20Examples" style="margin-top:6px;">More Examples</a>
+          <a href="/8/How%20to%20run%20the%20code"  style="margin-top:12px;">How to run the code</a>
+          <a href="/13/Finding%20data%20sources"  style="margin-top:3px;">Finding data sources</a>
+
+          <!--  <a href="/contact"  style="margin-top:6px;">Contact</a> -->
+        </div>
+        <div id="content">
+          <div class="mobile-h1"><a href="" class="mobile-page-title">Lists</a></div>
+          
+          
+
+<pre class="code">
+sum(0:9)
+append(LETTERS[1:13],letters[14:26])
+c(1,6,4,9)*2
+something &lt;- c(1,4,letters[2])  # indices start at one, you get (1,4,"b")
+length(something)
+</pre>
+
+<pre class="output">
+sum(0:9)
+[1] 45
+&gt; append(LETTERS[1:13],letters[14:26])
+ [1] &quot;A&quot; &quot;B&quot; &quot;C&quot; &quot;D&quot; &quot;E&quot; &quot;F&quot; &quot;G&quot; &quot;H&quot; &quot;I&quot; &quot;J&quot; &quot;K&quot; &quot;L&quot; &quot;M&quot; &quot;n&quot; &quot;o&quot;
+[16] &quot;p&quot; &quot;q&quot; &quot;r&quot; &quot;s&quot; &quot;t&quot; &quot;u&quot; &quot;v&quot; &quot;w&quot; &quot;x&quot; &quot;y&quot; &quot;z&quot;
+&gt; c(1,6,4,9)*2
+[1]  2 12  8 18
+&gt; something &lt;- c(1,4,letters[2]) #indices start at one, you get (1,4,"b")
+&gt; length(something)
+[1] 3
+</pre>
+
+
+  <h2>Generating lists</h2>
+  <o>
+    You can use a colon to generate a list of numbers:
+<pre class="code">
+-5:5
+</pre>
+<pre class="output">
+[1] -5 -4 -3 -2 -1  0  1  2  3  4  5
+</pre>
+  </p>
+  <h3>The c function</h3>
+  <p>
+    The <a href="http://www.stat.psu.edu/~dhunter/R/html/base/html/c.html"><span class="code">c</span> function</a> <b>combine</b>s the parameters into a list and converts them to the same type.
+<pre class="code">
+c("test",3)
+</pre>
+<pre class="output">[1] "test" "3"</pre>   
+<pre class="code">typeof("3")</pre>
+<pre class="output">[1] "character"</pre>
+</pre>
+  Here <span class="code">3</span> is converted to a string.
+  </p>
+  <h3>The seq function</h3>
+  <p>
+    <a href="http://www.stat.psu.edu/~dhunter/R/html/base/html/seq.html"><span class="code">seq</span></a> generates more complex regular <b>sequence</b>s:
+    <pre class="code">
+&gt; seq(from=1,to=4,by=.6)
+</pre>
+<pre class="output">
+[1] 1.0 1.6 2.2 2.8 3.4 4.0  
+</pre>
+    
+  </p>
+  <h2>Accessing list members</h2>
+  <p>
+    List members can be accessed using brackets as in most languages: <span class="code">(3:5)[2]</span>.
+    This returns <span class="code">4</span> because <b>indices start with 1</b>.
+    <br>
+    You can also extract multiple list members from a list: <span class="code">letters[2:4]</span> returns <span class="code">[1] "b" "c" "d"</span>.
+  </p>
+  <h2>Appending to lists</h2>
+  <p>
+    You can use the <a href="http://www.stat.psu.edu/~dhunter/R/html/base/html/append.html"><span class="code">append</span> function</a> for this.
+    Its return value has to be reassigned to the variable.<br>
+    By default the new value is appended at the end of the list. You can use the <span class="code">after</span> argument to change that:
+    <pre class="code">
+a <- 1:4
+append(a,2.4,after=2)
+</pre>
+<pre class="output">
+[1] 1.0 2.0 2.4 3.0 4.0
+</pre>
+  </p>
+  <h2>Operating on lists</h2>
+  <p>
+    R allows you to easily operate on all list values at once.
+  </p>
+    <pre class="code">
+c(1,2,3) + 3
+</pre>
+  <p>
+  This and the <a href="http://www.stat.psu.edu/~dhunter/R/html/base/html/apply.html"><span class="code">apply</span> function</a> allow you to avoid most for loops.
+  </p>
+<pre class="output">
+[1] 4 5 6  
+</pre>
+
+  <h2>Predefined lists</h2>
+  <p>
+    Lists for letters and month names are predefined:
+  </p>
+  <pre class="code">letters</pre>
+  <pre class="output">[1] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; &quot;e&quot; &quot;f&quot; &quot;g&quot; &quot;h&quot; &quot;i&quot; &quot;j&quot; &quot;k&quot; &quot;l&quot; &quot;m&quot; &quot;n&quot; &quot;o&quot;
+[16] &quot;p&quot; &quot;q&quot; &quot;r&quot; &quot;s&quot; &quot;t&quot; &quot;u&quot; &quot;v&quot; &quot;w&quot; &quot;x&quot; &quot;y&quot; &quot;z&quot;
+</pre>
+<br>
+<pre class="code">LETTERS</pre>
+  <pre class="output">[1] &quot;A&quot; &quot;B&quot; &quot;C&quot; &quot;D&quot; &quot;E&quot; &quot;F&quot; &quot;G&quot; &quot;H&quot; &quot;I&quot; &quot;J&quot; &quot;K&quot; &quot;L&quot; &quot;M&quot; &quot;N&quot; &quot;O&quot;
+[16] &quot;P&quot; &quot;Q&quot; &quot;R&quot; &quot;S&quot; &quot;T&quot; &quot;U&quot; &quot;V&quot; &quot;W&quot; &quot;X&quot; &quot;Y&quot; &quot;Z&quot;
+</pre>
+<br>
+<pre class="code">month.abb</pre>
+  <pre class="output">[1] &quot;Jan&quot; &quot;Feb&quot; &quot;Mar&quot; &quot;Apr&quot; &quot;May&quot; &quot;Jun&quot; &quot;Jul&quot; &quot;Aug&quot; &quot;Sep&quot; &quot;Oct&quot;
+[11] &quot;Nov&quot; &quot;Dec&quot;</pre>
+<br>
+<pre class="code">month.name</pre>
+  <pre class="output">[1] &quot;January&quot;   &quot;February&quot;  &quot;March&quot;     &quot;April&quot;     &quot;May&quot;      
+ [6] &quot;June&quot;      &quot;July&quot;      &quot;August&quot;    &quot;September&quot; &quot;October&quot;  
+[11] &quot;November&quot;  &quot;December&quot; </pre>
+
+  <h2>What are vectors?</h2>
+  <p>
+    Vectors are lists in which all elements have the same type. For example, the <span class="code">c</span> function creates a vector.
+  </p>
+    
+
+
+
+          
+        </div>
+        <div id="sidebar-right">
+
+          <a href="http://google-styleguide.googlecode.com/svn/trunk/google-r-style.html">R Style Guide</a>
+          <a href="http://cran.r-project.org/doc/manuals/R-lang.pdf">R Language Definition (pdf)</a>
+          <a href="http://www.stat.psu.edu/~dhunter/R/html/">R Function Info</a>
+          <a href="http://rstudio.org/">RStudio IDE</a>
+
+          <a href="http://www.mattzeunert.com" style="color: #999; font-size: 10px;margin-top: 20px;">Made by Matt Zeunert</a>
+        </div>
+      </div>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+      <script>
+        if ($("body").width() < 1024) {
+          $("#sidebar-right").prepend($(".sidebar-left").html() + "<hr>");
+        }
+      </script>
+      
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $("a[href$='" + document.location.pathname +  "']").css("color","black");
+    });
+  </script>
+
+  </body>
+</html>

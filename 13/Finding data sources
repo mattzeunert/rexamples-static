@@ -1,0 +1,139 @@
+<html>
+  <head>
+    <title>Finding data sources</title>
+    <link rel="stylesheet" type="text/css" href="/static/main.css" />
+    <link href='http://fonts.googleapis.com/css?family=Droid+Sans+Mono' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=PT+Sans:700' rel='stylesheet' type='text/css'>
+    
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-19870914-2']);
+      _gaq.push(['_trackPageview']);
+
+      ( function() {
+          var ga = document.createElement('script');
+          ga.type = 'text/javascript';
+          ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0];
+          s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <div style="margin-left:auto;margin-right:auto;width:1024px;margin-top:0px;margin-bottom:18px;" class="outer-wrapper">
+      <div id="header">
+        <div id="site-title">
+          <a href="/">R Examples</a>
+        </div>
+        <div id="page-title">
+          <h1><a href="">Finding data sources</a></h1>
+        </div>
+      </div>
+      <div style="clear:both"/>
+
+        <div class="sidebar-left">
+          <div class="introduction-nav">
+            <a href="/1/R%20Basics">Basics</a>
+            <a href="/2/Functions">Functions</a>
+            <a href="/3/Countdown">Countdown</a>
+            <a href="/4/Reading%20user%20input">User input</a>
+            <a href="/5/Guess%20a%20random%20number%20game">Random number game</a>
+            <a href="/7/Lists">Lists</a>
+            <a href="/10/Reading%20data">Reading data</a>
+            <a href="/11/Filtering%20data">Filtering data</a>
+          </div>
+          <a href="/9/More%20Examples" style="margin-top:6px;">More Examples</a>
+          <a href="/8/How%20to%20run%20the%20code"  style="margin-top:12px;">How to run the code</a>
+          <a href="/13/Finding%20data%20sources"  style="margin-top:3px;">Finding data sources</a>
+
+          <!--  <a href="/contact"  style="margin-top:6px;">Contact</a> -->
+        </div>
+        <div id="content">
+          <div class="mobile-h1"><a href="" class="mobile-page-title">Finding data sources</a></div>
+          
+          
+
+<p>
+	Here are a few data sets to play around with.
+</p>
+
+<h2>mtcars</h2>
+<pre class="code">
+print(head(mtcars))
+</pre>
+<pre class="output">
+                   mpg cyl disp  hp drat    wt  qsec vs am gear carb
+Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
+Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
+Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
+Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
+Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
+Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1
+</pre>
+<p>
+	This is <a href="http://www.stat.psu.edu/~dhunter/R/html/datasets/html/mtcars.html">a built-in data set</a>. Use it for sorting, filtering etc.
+</p>
+
+<h2>Quickly generating a data set</h2>
+<p>
+	You can use <a href="http://www.stat.psu.edu/~dhunter/R/html/base/html/matrix.html"><span class="code">matrix</span></a> to generate a quick dataset.
+	The first argument must contain your data.
+	You can use a distribution function or <a href="http://www.stat.psu.edu/~dhunter/R/html/base/html/sample.html"><span class="code">sample</span></a> for it.
+</p>
+<pre class="code">
+print(matrix(runif(6*3), nrow=6, ncol=3))
+</pre>
+<pre class="output">
+          [,1]       [,2]       [,3]
+[1,] 0.94210093 0.23582446 0.19571104
+[2,] 0.45026399 0.77989358 0.69763985
+[3,] 0.03567169 0.40572983 0.83394039
+[4,] 0.31246289 0.08076585 0.74957412
+[5,] 0.61316957 0.94886782 0.90769685
+[6,] 0.94545758 0.48658449 0.03396954
+</pre>
+
+<h2>Real US data: data.gov</h2>
+<p>
+	The US government published data sets on <a href="http://data.gov">data.gov</a>.
+	This includes US census data.
+	Most files are in CSV format and you can use <a href="/10/Reading%20data"><span class="code">read.table</span></a> to read them.
+</p>	
+
+<h2>International data</h2>
+<p>
+	The UN publishes data at <a href="http://data.un.org/">data.un.org</a>. This data is also available in CSV format.
+</p>
+
+
+
+          
+        </div>
+        <div id="sidebar-right">
+
+          <a href="http://google-styleguide.googlecode.com/svn/trunk/google-r-style.html">R Style Guide</a>
+          <a href="http://cran.r-project.org/doc/manuals/R-lang.pdf">R Language Definition (pdf)</a>
+          <a href="http://www.stat.psu.edu/~dhunter/R/html/">R Function Info</a>
+          <a href="http://rstudio.org/">RStudio IDE</a>
+
+          <a href="http://www.mattzeunert.com" style="color: #999; font-size: 10px;margin-top: 20px;">Made by Matt Zeunert</a>
+        </div>
+      </div>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+      <script>
+        if ($("body").width() < 1024) {
+          $("#sidebar-right").prepend($(".sidebar-left").html() + "<hr>");
+        }
+      </script>
+      
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $("a[href$='" + document.location.pathname +  "']").css("color","black");
+    });
+  </script>
+
+  </body>
+</html>

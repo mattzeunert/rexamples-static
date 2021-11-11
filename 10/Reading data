@@ -1,0 +1,198 @@
+<html>
+  <head>
+    <title>Reading data</title>
+    <link rel="stylesheet" type="text/css" href="/static/main.css" />
+    <link href='http://fonts.googleapis.com/css?family=Droid+Sans+Mono' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=PT+Sans:700' rel='stylesheet' type='text/css'>
+    
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-19870914-2']);
+      _gaq.push(['_trackPageview']);
+
+      ( function() {
+          var ga = document.createElement('script');
+          ga.type = 'text/javascript';
+          ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0];
+          s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <div style="margin-left:auto;margin-right:auto;width:1024px;margin-top:0px;margin-bottom:18px;" class="outer-wrapper">
+      <div id="header">
+        <div id="site-title">
+          <a href="/">R Examples</a>
+        </div>
+        <div id="page-title">
+          <h1><a href="">Reading data</a></h1>
+        </div>
+      </div>
+      <div style="clear:both"/>
+
+        <div class="sidebar-left">
+          <div class="introduction-nav">
+            <a href="/1/R%20Basics">Basics</a>
+            <a href="/2/Functions">Functions</a>
+            <a href="/3/Countdown">Countdown</a>
+            <a href="/4/Reading%20user%20input">User input</a>
+            <a href="/5/Guess%20a%20random%20number%20game">Random number game</a>
+            <a href="/7/Lists">Lists</a>
+            <a href="/10/Reading%20data">Reading data</a>
+            <a href="/11/Filtering%20data">Filtering data</a>
+          </div>
+          <a href="/9/More%20Examples" style="margin-top:6px;">More Examples</a>
+          <a href="/8/How%20to%20run%20the%20code"  style="margin-top:12px;">How to run the code</a>
+          <a href="/13/Finding%20data%20sources"  style="margin-top:3px;">Finding data sources</a>
+
+          <!--  <a href="/contact"  style="margin-top:6px;">Contact</a> -->
+        </div>
+        <div id="content">
+          <div class="mobile-h1"><a href="" class="mobile-page-title">Reading data</a></div>
+          
+          
+<p class="preface">
+	This code uses a <a href="http://www.census.gov/popest/national/files/NST_EST2009_ALLDATA.csv">dataset file with population estimates</a> by the US Census Bureau <a href="http://www.census.gov/popest/datasets.html">(more info)</a>.
+</p>
+<pre class="code">
+tbl &lt;- read.table(file.choose(),header=TRUE,sep=&quot;,&quot;)
+population &lt;- tbl[&quot;POPESTIMATE2009&quot;]
+print(summary(population[-1:-5,]))
+</pre>
+<pre class="output">
+    Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
+  544300  1734000  4141000  5980000  6613000 36960000 
+</pre> 
+
+<h2>Reading a CSV file</h2>
+<p>
+	<a href="http://www.stat.psu.edu/~dhunter/R/html/utils/html/read.table.html"><span class="code">read.table</span></a> can read a variety of basic data formats into tables or "data frames".<br>
+	<span class="code">sep</span> specifies the separator for the data, which is a comma for CSV files.<br>
+	<span class="code">header</span> indicates whether the first row contains the names of the data columns.
+</p>
+<p>
+	The first argument contains the file name.
+	In this case <a href="http://www.stat.psu.edu/~dhunter/R/html/base/html/file.choose.html"><span class="code">file.choose</span></a> is used to show a dialog.<br>
+	<div class="side-note">
+		(The user's home folder is the default working directory in RStudio.)
+	</div>
+</p>
+
+<h2>Indexing data frames</h2>
+<p>
+	See the <a href="http://stat.ethz.ch/R-manual/R-patched/library/base/html/Extract.data.frame.html">R documentation</a> for more information.
+</p>
+<h3>Getting a specific column</h3>
+<p>
+	You can use the column name as a string in brackets: <span class="code">tbl[&quot;POPESTIMATE2009&quot;]</span>:
+	<pre class="output">
+   POPESTIMATE2009
+1        307006550
+2         55283679
+3         66836911
+[...]
+	</pre>
+	Using the column number also works: <span class="code">tbl[17]</span>.
+</p>
+<h3>Getting a column as a list</h3>
+<p>
+	You can use the dollar sign for this: <span class="code">tbl$POPESTIMATE2009</span>
+	<pre class="output">
+[1] 307006550  55283679  66836911 113317879  71568081   4708708    698473
+[8]   6595778   2889450  36961664   5024748   3518288    885122    599657
+[...]
+</pre>
+</p>
+
+<h3>Fetching specific rows and columns</h3>
+<p>
+	Here the table will be treated as a 2-dimensional matrix.<br>
+	To get the first 5 rows from the population table:
+</p>
+	<pre class="code">
+population[1:5,]  #  first the rows, then the columns
+</pre>
+	<pre class="output">
+[1] 307006550  55283679  66836911 113317879  71568081
+</pre>
+<p>
+	The comma after the row information indicates that we want all columns. 
+	In this case we could also have written <span class="code">[1:5,1]</span> because we only have 1 column in <span class="code">population</span>.
+</p>
+<p>
+	Look at this data from the first 5 rows in the population column:
+</p>
+	<pre class="output">
+[1] 307006550  55283679  66836911 113317879  71568081
+</pre>
+<p>
+	These are too big to be population values for US States.
+	They are the total US population and that of the US Census Bureau regions: Northeast, Midwest, South and West.<br>
+	Since we are only interested in the states we can drop them like this:
+</p>
+	<pre class="code">
+population[-1:-5,]
+</pre>
+<p>
+	Negative numbers in matrix indices can be used to omit specific rows or columns.
+</p>
+<h2>A short equivalent of the code</h2>
+<p>
+	You can also fetch the population column at the same time as you remove the multi-state rows. Replace
+	<pre class="code">
+population &lt;- tbl[&quot;POPESTIMATE2009&quot;]
+print(summary(population[-1:-5,]))
+</pre>
+	with
+	<pre class="code">
+print(summary(tbl[-1:-5,"POPESTIMATE2009"]))
+</pre>
+</p>
+
+<h2>The summary function</h2>
+<p>
+	<a href="http://www.stat.psu.edu/~dhunter/R/html/base/html/summary.html"><span class="code">summary</span></a> calculates a few values based on the data passed as the first argument.
+	The exact values calculated depend on the class of the data.
+</p>
+<pre class="code">
+summary(1:10)
+</pre>
+<pre class="output">
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+   1.00    3.25    5.50    5.50    7.75   10.00 
+</pre>
+
+<br>
+
+
+          
+        </div>
+        <div id="sidebar-right">
+
+          <a href="http://google-styleguide.googlecode.com/svn/trunk/google-r-style.html">R Style Guide</a>
+          <a href="http://cran.r-project.org/doc/manuals/R-lang.pdf">R Language Definition (pdf)</a>
+          <a href="http://www.stat.psu.edu/~dhunter/R/html/">R Function Info</a>
+          <a href="http://rstudio.org/">RStudio IDE</a>
+
+          <a href="http://www.mattzeunert.com" style="color: #999; font-size: 10px;margin-top: 20px;">Made by Matt Zeunert</a>
+        </div>
+      </div>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+      <script>
+        if ($("body").width() < 1024) {
+          $("#sidebar-right").prepend($(".sidebar-left").html() + "<hr>");
+        }
+      </script>
+      
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $("a[href$='" + document.location.pathname +  "']").css("color","black");
+    });
+  </script>
+
+  </body>
+</html>

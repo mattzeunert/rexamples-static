@@ -1,0 +1,173 @@
+<html>
+  <head>
+    <title>Reading user input</title>
+    <link rel="stylesheet" type="text/css" href="/static/main.css" />
+    <link href='http://fonts.googleapis.com/css?family=Droid+Sans+Mono' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=PT+Sans:700' rel='stylesheet' type='text/css'>
+    
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-19870914-2']);
+      _gaq.push(['_trackPageview']);
+
+      ( function() {
+          var ga = document.createElement('script');
+          ga.type = 'text/javascript';
+          ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0];
+          s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <div style="margin-left:auto;margin-right:auto;width:1024px;margin-top:0px;margin-bottom:18px;" class="outer-wrapper">
+      <div id="header">
+        <div id="site-title">
+          <a href="/">R Examples</a>
+        </div>
+        <div id="page-title">
+          <h1><a href="">Reading user input</a></h1>
+        </div>
+      </div>
+      <div style="clear:both"/>
+
+        <div class="sidebar-left">
+          <div class="introduction-nav">
+            <a href="/1/R%20Basics">Basics</a>
+            <a href="/2/Functions">Functions</a>
+            <a href="/3/Countdown">Countdown</a>
+            <a href="/4/Reading%20user%20input">User input</a>
+            <a href="/5/Guess%20a%20random%20number%20game">Random number game</a>
+            <a href="/7/Lists">Lists</a>
+            <a href="/10/Reading%20data">Reading data</a>
+            <a href="/11/Filtering%20data">Filtering data</a>
+          </div>
+          <a href="/9/More%20Examples" style="margin-top:6px;">More Examples</a>
+          <a href="/8/How%20to%20run%20the%20code"  style="margin-top:12px;">How to run the code</a>
+          <a href="/13/Finding%20data%20sources"  style="margin-top:3px;">Finding data sources</a>
+
+          <!--  <a href="/contact"  style="margin-top:6px;">Contact</a> -->
+        </div>
+        <div id="content">
+          <div class="mobile-h1"><a href="" class="mobile-page-title">Reading user input</a></div>
+          
+          
+
+<pre class="code">
+readinteger &lt;- function()
+{ 
+  n &lt;- readline(prompt="Enter an integer: ")
+  return(as.integer(n))
+}
+
+print(readinteger())
+</pre>
+
+<pre class="output">
+Enter an integer: 88
+[1] 88
+</pre>
+
+  <h2>The readline function</h2>
+  <p>
+   <a href="http://stat.ethz.ch/R-manual/R-patched/library/base/html/readline.html"><span class="code">readline()</span></a> lets the user enter a one-line string at the terminal.
+   <br/>
+   The <span class="code">prompt</span> argument is printed in front of the user input. It usually ends on ": ".
+  </p>
+  <h2>The as.integer function</h2>
+  <p>
+    <a href=""http://stat.ethz.ch/R-manual/R-devel/library/base/html/integer.html><span class="code">as.integer</span></a> makes an integer out of the string.
+  </p>
+ <h2>Preventing failure if no number is entered</h2>
+ <p>
+   Right now if the user doesn't enter an integer, <span class="code">as.integer</span> will
+   return <a href="http://stat.ethz.ch/R-manual/R-patched/library/base/html/NA.html"><span class="code">NA</a></span> (Not Available).
+   We can avoid this by using <a href="http://stat.ethz.ch/R-manual/R-patched/library/base/html/NA.html"><span class="code">is.na</span></a> to check
+   the user input and asking again if the value is <span class="code">NA</span>:
+ <p>
+ <pre class="code">
+readinteger &lt;- function()
+{ 
+  n &lt;- readline(prompt=&quot;Enter an integer: &quot;)
+  n &lt;- as.integer(n)
+  if (is.na(n)){
+    n &lt;- readinteger()
+  }
+  return(n)
+}
+
+print(readinteger())
+ </pre>
+ <pre class="output">
+Enter an integer: 
+Enter an integer: boo
+Enter an integer: 44
+[1] 44
+Warning message:
+In readinteger() : NAs introduced by coercion
+ </pre>
+ <p>
+   However, a warning message is still shown. This is how to avoid it:
+ 
+ <pre class="code">
+readinteger &lt;- function()
+{ 
+  n &lt;- readline(prompt=&quot;Enter an integer: &quot;)
+  if(!grepl(&quot;^[0-9]+$&quot;,n))
+  {
+    return(readinteger())
+  }
+  
+  return(as.integer(n))
+}
+
+print(readinteger())
+ </pre>
+ 
+ <pre class="output">
+Enter an integer: 
+Enter an integer: 31r132weq
+Enter an integer: effasdf
+Enter an integer: 222
+[1] 222 
+ </pre>
+ <p>
+   <span class="code"><a href="http://stat.ethz.ch/R-manual/R-devel/library/base/html/grep.html">grepl</a></span> returns TRUE if the regular expression
+   <span class="code">"^[0-9]+$"</span> is matched. (The expression checks for a string that consists of nothing but one or more digits.)
+ </p>
+ <p>
+   <span class="code">!</span> negates the result and the if branch is executed if the user-entered string isn't an integer.
+ </p>
+
+
+
+          
+        </div>
+        <div id="sidebar-right">
+
+          <a href="http://google-styleguide.googlecode.com/svn/trunk/google-r-style.html">R Style Guide</a>
+          <a href="http://cran.r-project.org/doc/manuals/R-lang.pdf">R Language Definition (pdf)</a>
+          <a href="http://www.stat.psu.edu/~dhunter/R/html/">R Function Info</a>
+          <a href="http://rstudio.org/">RStudio IDE</a>
+
+          <a href="http://www.mattzeunert.com" style="color: #999; font-size: 10px;margin-top: 20px;">Made by Matt Zeunert</a>
+        </div>
+      </div>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+      <script>
+        if ($("body").width() < 1024) {
+          $("#sidebar-right").prepend($(".sidebar-left").html() + "<hr>");
+        }
+      </script>
+      
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $("a[href$='" + document.location.pathname +  "']").css("color","black");
+    });
+  </script>
+
+  </body>
+</html>

@@ -1,0 +1,135 @@
+<html>
+  <head>
+    <title>Functions</title>
+    <link rel="stylesheet" type="text/css" href="/static/main.css" />
+    <link href='http://fonts.googleapis.com/css?family=Droid+Sans+Mono' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=PT+Sans:700' rel='stylesheet' type='text/css'>
+    
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-19870914-2']);
+      _gaq.push(['_trackPageview']);
+
+      ( function() {
+          var ga = document.createElement('script');
+          ga.type = 'text/javascript';
+          ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0];
+          s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <div style="margin-left:auto;margin-right:auto;width:1024px;margin-top:0px;margin-bottom:18px;" class="outer-wrapper">
+      <div id="header">
+        <div id="site-title">
+          <a href="/">R Examples</a>
+        </div>
+        <div id="page-title">
+          <h1><a href="">Functions</a></h1>
+        </div>
+      </div>
+      <div style="clear:both"/>
+
+        <div class="sidebar-left">
+          <div class="introduction-nav">
+            <a href="/1/R%20Basics">Basics</a>
+            <a href="/2/Functions">Functions</a>
+            <a href="/3/Countdown">Countdown</a>
+            <a href="/4/Reading%20user%20input">User input</a>
+            <a href="/5/Guess%20a%20random%20number%20game">Random number game</a>
+            <a href="/7/Lists">Lists</a>
+            <a href="/10/Reading%20data">Reading data</a>
+            <a href="/11/Filtering%20data">Filtering data</a>
+          </div>
+          <a href="/9/More%20Examples" style="margin-top:6px;">More Examples</a>
+          <a href="/8/How%20to%20run%20the%20code"  style="margin-top:12px;">How to run the code</a>
+          <a href="/13/Finding%20data%20sources"  style="margin-top:3px;">Finding data sources</a>
+
+          <!--  <a href="/contact"  style="margin-top:6px;">Contact</a> -->
+        </div>
+        <div id="content">
+          <div class="mobile-h1"><a href="" class="mobile-page-title">Functions</a></div>
+          
+          
+
+<pre class="code">
+Square &lt;- function(x) {
+  return(x^2)
+}
+
+print(Square(4))
+print(Square(x=4)) # same thing
+</pre>
+
+<pre class="output">
+[1] 16
+[1] 16
+</pre>
+
+
+
+
+<h2>Defining functions</h2>
+<p>
+  Functions can be defined like this: <span class="code">function(parameter1, parameter2, parameter3){code}</span>.<br>
+  For use they are assigned to a variable (using normal <span class="code">&lt;-</span> assignment operator).
+</p>
+ <h2>Return values</h2>
+<p>
+  The <a href="http://stat.ethz.ch/R-manual/R-devel/library/base/html/function.html">return function</a> is used for return values: <span class="code">return(value)</span>.
+  If no value is given <span class="code">NULL</span> is returned. 
+</p>
+<h2>Exponentiation</h2>
+<p>
+  Raise a to the power of b: <span class="code">a^b</span>.
+  It's also possible to use <span class="code">**</span> instead of <span class="code">^</span>.
+</p>
+<h2>Named arguments</h2>
+<p>
+  Named arguments work like this: <span class="code">DoSomething(color="red",number=55)</span>.
+</p>
+<p>
+  You can also give the first arguments in order and then use named arguments: <span class="code">DoSth(value1,value2,arg4=value4,arg3=value3)</span>.
+</p>
+<h2>Automatic printing at the console</h2>
+<p>
+  When using the console directly R automatically prints the return value of a statement if you don't assign it to a variable.
+  This doesn't work in loops or functions.
+</p>
+<p>
+  You can use <span class="code">invisible(CalculateSth())</span> if you don't want the return value to be printed.
+</p>
+ 
+
+
+          
+        </div>
+        <div id="sidebar-right">
+
+          <a href="http://google-styleguide.googlecode.com/svn/trunk/google-r-style.html">R Style Guide</a>
+          <a href="http://cran.r-project.org/doc/manuals/R-lang.pdf">R Language Definition (pdf)</a>
+          <a href="http://www.stat.psu.edu/~dhunter/R/html/">R Function Info</a>
+          <a href="http://rstudio.org/">RStudio IDE</a>
+
+          <a href="http://www.mattzeunert.com" style="color: #999; font-size: 10px;margin-top: 20px;">Made by Matt Zeunert</a>
+        </div>
+      </div>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+      <script>
+        if ($("body").width() < 1024) {
+          $("#sidebar-right").prepend($(".sidebar-left").html() + "<hr>");
+        }
+      </script>
+      
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $("a[href$='" + document.location.pathname +  "']").css("color","black");
+    });
+  </script>
+
+  </body>
+</html>
